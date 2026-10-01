@@ -1,0 +1,21 @@
+@CanchaFutbol_HostAddress = http://localhost:10000
+
+GET {{CanchaFutbol_HostAddress}}/api/canchas
+Accept: application/json
+
+###
+
+GET {{CanchaFutbol_HostAddress}}/api/cancha-futbol
+Accept: application/json
+
+###
+
+GET {{CanchaFutbol_HostAddress}}/api/servicios
+Accept: application/json
+
+###
+
+GET {{CanchaFutbol_HostAddress}}/api/empresa
+Accept: application/json
+
+###

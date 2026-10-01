@@ -9,4 +9,4 @@ WORKDIR /app
 COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://0.0.0.0:10000
 EXPOSE 10000
-ENTRYPOINT ["dotnet", "Polleria.dll"]
+ENTRYPOINT ["dotnet", "Cancha-Futbol.dll"]

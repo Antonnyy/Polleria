@@ -15,9 +15,6 @@ var app = builder.Build();
 
 app.UseCors();
 
-// ============================================================================
-// 1. DATOS DE HORARIOS, RESERVAS Y DISPONIBILIDAD DE CANCHAS DE FÚTBOL
-// ============================================================================
 var canchasHorarios = new List<CanchaHorario>
 {
     new CanchaHorario
@@ -252,9 +249,7 @@ var canchasHorarios = new List<CanchaHorario>
     }
 };
 
-// ============================================================================
-// 2. CATÁLOGO DE SERVICIOS OFRECIDOS POR EL COMPLEJO DEPORTIVO
-// ============================================================================
+
 var serviciosComplejo = new List<ServicioDeportivo>
 {
     new ServicioDeportivo
@@ -412,11 +407,11 @@ Func<string?, string?, string?, string?, string?, double?, string?, IResult> con
     return Results.Ok(query.ToList());
 };
 
-// Rutas principales de la API de Canchas (incluye /api/polleria como alias de compatibilidad)
-app.MapGet("/api/canchas", consultarCanchasHandler);
-app.MapGet("/api/polleria", consultarCanchasHandler);
 
-// Detalle individual de un horario/cancha por ID
+app.MapGet("/api/canchas", consultarCanchasHandler);
+app.MapGet("/api/cancha-futbol", consultarCanchasHandler);
+
+
 app.MapGet("/api/canchas/{id:int}", (int id) =>
 {
     var cancha = canchasHorarios.FirstOrDefault(c => c.Id == id);
@@ -425,7 +420,7 @@ app.MapGet("/api/canchas/{id:int}", (int id) =>
         : Results.NotFound(new { message = $"No se encontró el horario de cancha con ID {id}" });
 });
 
-// Listado de servicios del complejo deportivo
+
 app.MapGet("/api/servicios", (string? categoria, string? buscar) =>
 {
     IEnumerable<ServicioDeportivo> query = serviciosComplejo;
@@ -445,7 +440,7 @@ app.MapGet("/api/servicios", (string? categoria, string? buscar) =>
     return Results.Ok(query.ToList());
 });
 
-// Información general del complejo, promociones y User Personas desde la API
+
 app.MapGet("/api/empresa", () =>
 {
     return Results.Ok(new
